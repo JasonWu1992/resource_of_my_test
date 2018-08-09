@@ -1,7 +1,7 @@
 import tornado.web
 import tornado.ioloop
 import os
-
+import tornado.httpserver
 abs_path = os.path.dirname(os.path.abspath("__file__"))
 print(abs_path)
 
@@ -21,5 +21,7 @@ if __name__ == '__main__':
         static_path=os.path.join(abs_path, 'static')
     )
     # 监听端口
-    app.listen(8000)
+    # 实例化服务器对象
+    httpServer = tornado.httpserver.HTTPServer(app)
+    httpServer.listen(8000)
     tornado.ioloop.IOLoop.current().start()
